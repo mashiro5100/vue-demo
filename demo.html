@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>致不断前进的你</title>        
+    </head>
+    <body>
+
+
+
+        <div id="app">
+            {{ message }}
+            <h1>{{ person.name }}</h1>
+            <ul>
+                <li>{{ hobbies[0] }}</li>
+                <li>{{ hobbies[1] }}</li>
+            </ul>
+            <h3 v-text="message+'!'"></h3>
+            <p v-html="htmlText"></p>
+            <p v-text="htmlText"></p>
+            <input type="button" value="sayHello" @click="sayHello">
+            <input type="button" value="sayLink" @dblclick="sayHello">
+            <p>{{ food }}</p>
+            <button @click="eatFood">eat food</button>
+        </div>
+        <div id="counter">
+            <button @click="sub">-</button>
+            <span>{{ num }}</span>
+            <button @click="add">+</button>
+            <img src="1.png" v-show="false">
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            var person = {
+                name: "link",
+                age: 28
+            };
+            var hobbies = ["game", "excercise"];
+
+
+            function sayHello() {
+                alert("hello!");
+            }
+            function sayLink() {
+                alert("link!");
+            }
+            var app = new Vue({
+                el: "#app",
+                data: {
+                    message: "hello vue!",
+                    person: person,
+                    hobbies: hobbies,
+                    htmlText: "<a href='www.baidu.com'>hello</a>",
+                    food: "beef"
+                },
+
+                methods: {
+                    sayHello: sayHello,
+                    eatFood: function() {
+                        this.food = "eat beef";
+                    }        
+                }
+            });
+            
+            var app2 = new Vue({
+                el: "#counter",
+                data: {
+                    num: 0
+                },
+                methods: {
+                    add: function() {
+                        this.num++;
+                        if(this.num > 10){
+                            this.num--;
+                            alert("max value is " + this.num);
+                        }
+                    },
+                    sub: function(){
+                        this.num--;
+                        if(this.num < 0){
+                            this.num++;
+                            alert("min value is "+ this.num);
+                        }
+
+                    }
+                }
+            });
+        </script>
+
+    </body>
+</html>
